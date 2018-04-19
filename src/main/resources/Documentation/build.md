@@ -1,80 +1,70 @@
-Build
-=====
+# Build
 
-This plugin is built with Buck.
+This plugin can be built with Bazel, and two build modes are supported:
 
-Two build modes are supported: Standalone and in Gerrit tree. Standalone
-build mode is recommended, as this mode doesn't require local Gerrit
-tree to exist.
+* Standalone
+* In Gerrit tree
 
-Build standalone
-----------------
+Standalone build mode is recommended, as this mode doesn't require local Gerrit
+tree to exist. Moreover, there are some limitations and additional manual steps
+required when building in Gerrit tree mode (see corresponding sections).
 
-Clone bucklets library:
-
-```
-  git clone https://gerrit.googlesource.com/bucklets
-
-```
-and link it to heartbeat directory:
-
-```
-  cd heartbeat && ln -s ../bucklets .
-```
-
-Add link to the .buckversion file:
-
-```
-  cd heartbeat && ln -s bucklets/buckversion .buckversion
-```
-
-Add link to the .watchmanconfig file:
-
-```
-  cd heartbeat && ln -s bucklets/watchmanconfig .watchmanconfig
-```
+## Build standalone
 
 To build the plugin, issue the following command:
 
 ```
-  buck build plugin
+  bazel build @PLUGIN@
 ```
 
 The output is created in
 
 ```
-  buck-out/gen/heartbeat.jar
+  bazel-genfiles/@PLUGIN@.jar
 ```
 
-This project can be imported into the Eclipse IDE:
+To package the plugin sources run:
 
 ```
-  ./bucklets/tools/eclipse.py
+  bazel build lib@PLUGIN@__plugin-src.jar
+```
+
+The output is created in:
+
+```
+  bazel-bin/lib@PLUGIN@__plugin-src.jar
 ```
 
 To execute the tests run:
 
 ```
-  buck test
+  bazel test //...
 ```
 
-Build in Gerrit tree
---------------------
-
-Clone or link this plugin to the plugins directory of Gerrit's source
-tree, and issue the command:
+This project can be imported into the Eclipse IDE:
 
 ```
-  buck build plugins/heartbeat
+  ./tools/eclipse/project.sh
+```
+
+## Build in Gerrit tree
+
+Clone or link this plugin to the plugins directory of Gerrit's
+source tree. From Gerrit source tree issue the command:
+
+```
+  bazel build plugins/@PLUGIN@
 ```
 
 The output is created in
 
 ```
-  buck-out/gen/plugins/heartbeat/heartbeat.jar
+  bazel-genfiles/plugins/@PLUGIN@/@PLUGIN@.jar
 ```
 
 This project can be imported into the Eclipse IDE:
+Add the plugin name to the `CUSTOM_PLUGINS` in `tools/bzl/plugins.bzl`, and
+execute:
 
 ```
   ./tools/eclipse/project.py
@@ -83,8 +73,10 @@ This project can be imported into the Eclipse IDE:
 To execute the tests run:
 
 ```
-  buck test --include heartbeat
+  bazel test --test_tag_filters=@PLUGIN@ //...
 ```
 
-How to build the Gerrit Plugin API is described in the [Gerrit
-documentation](../../../Documentation/dev-buck.html#_extension_and_plugin_api_jar_files).
+
+[Back to @PLUGIN@ documentation index][index]
+
+[index]: index.html

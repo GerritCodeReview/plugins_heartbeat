@@ -16,29 +16,24 @@ package com.ericsson.gerrit.plugins.heartbeat;
 
 import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.extensions.events.LifecycleListener;
-import com.google.gerrit.reviewdb.client.Branch;
-import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.extensions.registration.DynamicItem;
+import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-
+import java.util.Timer;
+import java.util.TimerTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-/**
- * Timer-based daemon doing the actual heartbeat task.
- */
+/** Timer-based daemon doing the actual heartbeat task. */
 @Singleton
 public class HeartbeatDaemon implements LifecycleListener {
 
   private static final Logger logger = LoggerFactory.getLogger(HeartbeatDaemon.class);
   private static final String HEARTBEAT_THREAD_NAME = "StreamEventHeartbeat";
-  private final EventDispatcher dispatcher;
+  private final DynamicItem<EventDispatcher> dispatcher;
   private final HeartbeatConfig config;
   private final Timer timer;
-  private final Branch.NameKey branch;
 
   /**
    * Constructor that sets the heartbeat timer.
@@ -47,19 +42,16 @@ public class HeartbeatDaemon implements LifecycleListener {
    * @param config the plugin config
    */
   @Inject
-  public HeartbeatDaemon(EventDispatcher dispatcher, HeartbeatConfig config) {
+  public HeartbeatDaemon(DynamicItem<EventDispatcher> dispatcher, HeartbeatConfig config) {
     this.dispatcher = dispatcher;
     this.config = config;
-    branch = new Branch.NameKey(Project.NameKey.parse(config.getProject()),
-        config.getRef());
     timer = new Timer(HEARTBEAT_THREAD_NAME, true);
   }
 
   @Override
   public void start() {
     timer.schedule(new HeartbeatTask(), 0, config.getDelay());
-    logger.info("Initialized to send heartbeat event every " + config.getDelay()
-        + " milliseconds");
+    logger.info("Initialized to send heartbeat event every " + config.getDelay() + " milliseconds");
   }
 
   @Override
@@ -71,7 +63,11 @@ public class HeartbeatDaemon implements LifecycleListener {
   private class HeartbeatTask extends TimerTask {
     @Override
     public void run() {
-      dispatcher.postEvent(branch, new HeartbeatEvent());
+      try {
+        dispatcher.get().postEvent(new HeartbeatEvent());
+      } catch (OrmException e) {
+        logger.error("Failed to post hearbeat event: " + e.getMessage(), e);
+      }
     }
   }
 }

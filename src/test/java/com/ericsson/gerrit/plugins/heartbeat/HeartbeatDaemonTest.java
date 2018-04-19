@@ -16,7 +16,6 @@ package com.ericsson.gerrit.plugins.heartbeat;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.createNiceMock;
-import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
@@ -24,14 +23,14 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 
+import com.google.gerrit.common.EventDispatcher;
+import com.google.gerrit.extensions.registration.DynamicItem;
+import com.google.gerrit.reviewdb.server.ReviewDb;
+import com.google.gwtorm.client.KeyUtil;
+import com.google.gwtorm.server.SchemaFactory;
+import com.google.gwtorm.server.StandardKeyEncoder;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.google.gerrit.common.EventDispatcher;
-import com.google.gerrit.reviewdb.client.Branch;
-import com.google.gerrit.reviewdb.client.Project;
-import com.google.gwtorm.client.KeyUtil;
-import com.google.gwtorm.server.StandardKeyEncoder;
 
 public class HeartbeatDaemonTest {
 
@@ -40,28 +39,29 @@ public class HeartbeatDaemonTest {
   }
 
   private EventDispatcher eventDispatcherMock;
-  private HeartbeatConfig heartbeatConfigMock;
   private HeartbeatDaemon heartbeatDaemon;
 
+  @SuppressWarnings("unchecked")
   @Before
   public void setUp() throws Exception {
     eventDispatcherMock = createNiceMock(EventDispatcher.class);
     replay(eventDispatcherMock);
-    heartbeatConfigMock = createMock(HeartbeatConfig.class);
+    DynamicItem<EventDispatcher> dynamicEventDispatcherMock = createNiceMock(DynamicItem.class);
+    expect(dynamicEventDispatcherMock.get()).andReturn(eventDispatcherMock).anyTimes();
+    replay(dynamicEventDispatcherMock);
+    HeartbeatConfig heartbeatConfigMock = createMock(HeartbeatConfig.class);
     expect(heartbeatConfigMock.getDelay()).andReturn(1).anyTimes();
-    expect(heartbeatConfigMock.getProject()).andReturn("someProject").anyTimes();
-    expect(heartbeatConfigMock.getRef()).andReturn("someRef").anyTimes();
     replay(heartbeatConfigMock);
-    heartbeatDaemon = new HeartbeatDaemon(eventDispatcherMock, heartbeatConfigMock);
+    SchemaFactory<ReviewDb> schemaFactoryMock = createNiceMock(SchemaFactory.class);
+    expect(schemaFactoryMock.open()).andReturn(createNiceMock(ReviewDb.class)).anyTimes();
+    replay(schemaFactoryMock);
+    heartbeatDaemon = new HeartbeatDaemon(dynamicEventDispatcherMock, heartbeatConfigMock);
   }
 
   @Test
-  public void thatDaemonSendsHeartbeatEvents() throws InterruptedException {
+  public void thatDaemonSendsHeartbeatEvents() throws Exception {
     reset(eventDispatcherMock);
-    eventDispatcherMock.postEvent(
-        eq(new Branch.NameKey(Project.NameKey.parse(heartbeatConfigMock
-            .getProject()), heartbeatConfigMock.getRef())),
-        isA(HeartbeatEvent.class));
+    eventDispatcherMock.postEvent(isA(HeartbeatEvent.class));
     expectLastCall().atLeastOnce();
     replay(eventDispatcherMock);
 

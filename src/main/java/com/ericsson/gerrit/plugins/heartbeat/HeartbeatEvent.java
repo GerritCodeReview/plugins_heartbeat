@@ -16,14 +16,10 @@ package com.ericsson.gerrit.plugins.heartbeat;
 
 import com.google.gerrit.server.events.Event;
 
-/**
- * Simple event implementation for plugin purposes.
- */
+/** Simple event implementation for plugin purposes. */
 public class HeartbeatEvent extends Event {
 
-  /**
-   * Constructor setting our custom event.
-   */
+  /** Constructor setting our custom event. */
   public HeartbeatEvent() {
     super("heartbeat");
   }

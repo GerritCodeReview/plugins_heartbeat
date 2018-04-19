@@ -16,9 +16,7 @@ package com.ericsson.gerrit.plugins.heartbeat;
 
 import com.google.gerrit.lifecycle.LifecycleModule;
 
-/**
- * Listener bound to plugin's daemon implementation.
- */
+/** Listener bound to plugin's daemon implementation. */
 public class HeartbeatModule extends LifecycleModule {
 
   @Override
