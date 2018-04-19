@@ -17,6 +17,7 @@ package com.ericsson.gerrit.plugins.heartbeat;
 import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
+import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -65,7 +66,7 @@ public class HeartbeatDaemon implements LifecycleListener {
     public void run() {
       try {
         dispatcher.get().postEvent(new HeartbeatEvent());
-      } catch (OrmException e) {
+      } catch (OrmException | PermissionBackendException e) {
         logger.error("Failed to post hearbeat event: " + e.getMessage(), e);
       }
     }
