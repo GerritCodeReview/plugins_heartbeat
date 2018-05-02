@@ -22,6 +22,30 @@
       "revId": "2f9dd223d9da7913d5016057cd615fece528e331",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57cd6831_358d5a81",
+        "filename": "WORKSPACE",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2018-05-02T14:00:11Z",
+      "side": 1,
+      "message": "While updating to that revision, I found a little problem fixed by https://gerrit-review.googlesource.com/#/c/bazlets/+/175790/\n\nSo we need to use 332dc02d8837cbe8ec9fb995b868ebb13feb4963 once the change is merged",
+      "parentUuid": "0c0e7e9f_c01666d5",
+      "range": {
+        "startLine": 6,
+        "startChar": 14,
+        "endLine": 6,
+        "endChar": 54
+      },
+      "revId": "2f9dd223d9da7913d5016057cd615fece528e331",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
