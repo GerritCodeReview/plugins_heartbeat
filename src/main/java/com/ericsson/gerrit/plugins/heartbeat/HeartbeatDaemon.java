@@ -14,9 +14,9 @@
 
 package com.ericsson.gerrit.plugins.heartbeat;
 
-import com.google.gerrit.common.EventDispatcher;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
+import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
