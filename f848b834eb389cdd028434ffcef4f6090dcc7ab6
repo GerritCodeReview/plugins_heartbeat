@@ -46,6 +46,30 @@
       "revId": "f848b834eb389cdd028434ffcef4f6090dcc7ab6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd712d3f_73b45dbd",
+        "filename": "WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-05-10T00:52:37Z",
+      "side": 1,
+      "message": "My bad, I misread it.\n\nBut still, I\u0027d rather have a separate commit on master that explicitly sets the correct revision.  It should not be done in the merge commit, otherwise it causes the confusion above.",
+      "parentUuid": "eace5306_c8d6de35",
+      "range": {
+        "startLine": 6,
+        "startChar": 14,
+        "endLine": 6,
+        "endChar": 54
+      },
+      "revId": "f848b834eb389cdd028434ffcef4f6090dcc7ab6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
