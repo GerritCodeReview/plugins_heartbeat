@@ -51,7 +51,7 @@ public class HeartbeatDaemon implements LifecycleListener {
   @Override
   public void start() {
     timer.schedule(new HeartbeatTask(), 0, config.getDelay());
-    logger.info("Initialized to send heartbeat event every " + config.getDelay() + " milliseconds");
+    logger.info("Initialized to send heartbeat event every {} milliseconds", config.getDelay());
   }
 
   @Override
