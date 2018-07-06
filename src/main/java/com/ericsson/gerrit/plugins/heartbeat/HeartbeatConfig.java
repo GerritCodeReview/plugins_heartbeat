@@ -52,7 +52,7 @@ public class HeartbeatConfig {
   private void load(File configPath) throws ConfigInvalidException, IOException {
     FileBasedConfig cfg = new FileBasedConfig(configPath, FS.DETECTED);
     if (!cfg.getFile().exists() || cfg.getFile().length() == 0) {
-      logger.debug("No " + cfg.getFile() + " or empty; using all default values");
+      logger.debug("No {} or empty; using all default values", cfg.getFile());
       return;
     }
 

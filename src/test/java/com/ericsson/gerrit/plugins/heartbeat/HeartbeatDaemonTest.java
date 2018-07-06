@@ -29,6 +29,7 @@ import com.google.gerrit.server.events.EventDispatcher;
 import com.google.gwtorm.client.KeyUtil;
 import com.google.gwtorm.server.SchemaFactory;
 import com.google.gwtorm.server.StandardKeyEncoder;
+import java.util.concurrent.TimeUnit;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -66,7 +67,7 @@ public class HeartbeatDaemonTest {
     replay(eventDispatcherMock);
 
     heartbeatDaemon.start();
-    Thread.sleep(500);
+    TimeUnit.MILLISECONDS.sleep(500);
     verify(eventDispatcherMock);
     heartbeatDaemon.stop();
   }
