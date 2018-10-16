@@ -44,6 +44,7 @@ public class HeartbeatIT extends LightweightPluginDaemonTest {
     CountDownLatch expectedEventLatch = new CountDownLatch(1);
     RegistrationHandle handle =
         eventListeners.add(
+            "heartbeat",
             new UserScopedEventListener() {
               @Override
               public void onEvent(Event event) {
