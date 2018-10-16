@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6cd6ae24_2142615b",
+        "filename": "src/test/java/com/ericsson/gerrit/plugins/heartbeat/HeartbeatIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2018-10-16T18:59:42Z",
+      "side": 1,
+      "message": "Unless there is a way to get this (plugin name) from either one of the above annotation objects?",
+      "range": {
+        "startLine": 47,
+        "startChar": 12,
+        "endLine": 47,
+        "endChar": 23
+      },
+      "revId": "b010813e1981c7cc358d2b8ebfc79c8a876dd3f1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
