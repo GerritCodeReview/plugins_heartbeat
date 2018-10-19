@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5d1c7c8e_9e17dc4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2018-10-19T19:34:24Z",
+      "side": 1,
+      "message": "Will propose this through a stable-2.14 change instead, so all branches can eventually benefit from this (albeit minor).",
+      "revId": "f3b05ac5b7be2a005c0c642bdf7efeb081dfd6db",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
