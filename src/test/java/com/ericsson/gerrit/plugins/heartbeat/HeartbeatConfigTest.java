@@ -17,8 +17,6 @@ package com.ericsson.gerrit.plugins.heartbeat;
 import static org.junit.Assert.assertEquals;
 
 import com.google.gerrit.server.config.SitePaths;
-import com.google.gwtorm.client.KeyUtil;
-import com.google.gwtorm.server.StandardKeyEncoder;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -29,11 +27,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class HeartbeatConfigTest {
-
-  static {
-    KeyUtil.setEncoderImpl(new StandardKeyEncoder());
-  }
-
   private SitePaths sitePaths;
   private HeartbeatConfig heartbeatConfig;
 
