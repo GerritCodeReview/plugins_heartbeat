@@ -24,21 +24,12 @@ import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 
 import com.google.gerrit.extensions.registration.DynamicItem;
-import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.events.EventDispatcher;
-import com.google.gwtorm.client.KeyUtil;
-import com.google.gwtorm.server.SchemaFactory;
-import com.google.gwtorm.server.StandardKeyEncoder;
 import java.util.concurrent.TimeUnit;
 import org.junit.Before;
 import org.junit.Test;
 
 public class HeartbeatDaemonTest {
-
-  static {
-    KeyUtil.setEncoderImpl(new StandardKeyEncoder());
-  }
-
   private EventDispatcher eventDispatcherMock;
   private HeartbeatDaemon heartbeatDaemon;
 
@@ -53,9 +44,6 @@ public class HeartbeatDaemonTest {
     HeartbeatConfig heartbeatConfigMock = createMock(HeartbeatConfig.class);
     expect(heartbeatConfigMock.getDelay()).andReturn(1).anyTimes();
     replay(heartbeatConfigMock);
-    SchemaFactory<ReviewDb> schemaFactoryMock = createNiceMock(SchemaFactory.class);
-    expect(schemaFactoryMock.open()).andReturn(createNiceMock(ReviewDb.class)).anyTimes();
-    replay(schemaFactoryMock);
     heartbeatDaemon = new HeartbeatDaemon(dynamicEventDispatcherMock, heartbeatConfigMock);
   }
 
