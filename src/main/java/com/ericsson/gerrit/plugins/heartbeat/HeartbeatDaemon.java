@@ -66,7 +66,7 @@ public class HeartbeatDaemon implements LifecycleListener {
       try {
         dispatcher.get().postEvent(new HeartbeatEvent());
       } catch (OrmException e) {
-        logger.error("Failed to post hearbeat event: " + e.getMessage(), e);
+        logger.error("Failed to post heartbeat event: %s", e.getMessage(), e);
       }
     }
   }
