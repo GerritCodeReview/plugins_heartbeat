@@ -22,6 +22,30 @@
       "revId": "d7a43eafafd988eae7d3b6b75a6f1ca05b6d0ecb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c71f7f0a_f84d3c7f",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/heartbeat/HeartbeatDaemon.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2019-04-04T15:02:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f161c7e9_f11ca969",
+      "range": {
+        "startLine": 69,
+        "startChar": 54,
+        "endLine": 69,
+        "endChar": 56
+      },
+      "revId": "d7a43eafafd988eae7d3b6b75a6f1ca05b6d0ecb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
