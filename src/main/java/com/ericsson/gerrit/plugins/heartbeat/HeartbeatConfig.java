@@ -14,6 +14,7 @@
 
 package com.ericsson.gerrit.plugins.heartbeat;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -22,13 +23,11 @@ import java.io.IOException;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.storage.file.FileBasedConfig;
 import org.eclipse.jgit.util.FS;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /** Plugin-specific config file data loader and holder. */
 @Singleton
 public class HeartbeatConfig {
-  private static final Logger logger = LoggerFactory.getLogger(HeartbeatConfig.class);
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   public static final int DEFAULT_DELAY = 15000;
   public static final String DELAY_KEY = "delay";
@@ -52,7 +51,7 @@ public class HeartbeatConfig {
   private void load(File configPath) throws ConfigInvalidException, IOException {
     FileBasedConfig cfg = new FileBasedConfig(configPath, FS.DETECTED);
     if (!cfg.getFile().exists() || cfg.getFile().length() == 0) {
-      logger.debug("No {} or empty; using all default values", cfg.getFile());
+      logger.atFine().log("No %s or empty; using all default values", cfg.getFile());
       return;
     }
 

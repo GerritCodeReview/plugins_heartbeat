@@ -14,6 +14,7 @@
 
 package com.ericsson.gerrit.plugins.heartbeat;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.server.events.EventDispatcher;
@@ -23,14 +24,12 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.Timer;
 import java.util.TimerTask;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /** Timer-based daemon doing the actual heartbeat task. */
 @Singleton
 public class HeartbeatDaemon implements LifecycleListener {
 
-  private static final Logger logger = LoggerFactory.getLogger(HeartbeatDaemon.class);
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private static final String HEARTBEAT_THREAD_NAME = "StreamEventHeartbeat";
   private final DynamicItem<EventDispatcher> dispatcher;
   private final HeartbeatConfig config;
@@ -52,13 +51,14 @@ public class HeartbeatDaemon implements LifecycleListener {
   @Override
   public void start() {
     timer.schedule(new HeartbeatTask(), 0, config.getDelay());
-    logger.info("Initialized to send heartbeat event every {} milliseconds", config.getDelay());
+    logger.atInfo().log(
+        "Initialized to send heartbeat event every %d milliseconds", config.getDelay());
   }
 
   @Override
   public void stop() {
     timer.cancel();
-    logger.info("Stopped sending heartbeat event");
+    logger.atInfo().log("Stopped sending heartbeat event");
   }
 
   private class HeartbeatTask extends TimerTask {
@@ -67,7 +67,7 @@ public class HeartbeatDaemon implements LifecycleListener {
       try {
         dispatcher.get().postEvent(new HeartbeatEvent());
       } catch (OrmException | PermissionBackendException e) {
-        logger.error("Failed to post hearbeat event: " + e.getMessage(), e);
+        logger.atSevere().withCause(e).log("Failed to post heartbeat event");
       }
     }
   }
