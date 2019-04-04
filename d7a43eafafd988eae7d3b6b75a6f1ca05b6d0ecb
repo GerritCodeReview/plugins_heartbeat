@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f161c7e9_f11ca969",
+        "filename": "src/main/java/com/ericsson/gerrit/plugins/heartbeat/HeartbeatDaemon.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-04-04T14:46:46Z",
+      "side": 1,
+      "message": "{}, rather?",
+      "range": {
+        "startLine": 69,
+        "startChar": 54,
+        "endLine": 69,
+        "endChar": 56
+      },
+      "revId": "d7a43eafafd988eae7d3b6b75a6f1ca05b6d0ecb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
