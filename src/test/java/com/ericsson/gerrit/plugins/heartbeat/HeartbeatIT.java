@@ -55,7 +55,7 @@ public class HeartbeatIT extends LightweightPluginDaemonTest {
 
               @Override
               public CurrentUser getUser() {
-                return identifiedUserFactory.create(user.id);
+                return identifiedUserFactory.create(user.id());
               }
             });
     assertWithMessage("heartbeat event received")
