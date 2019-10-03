@@ -35,5 +35,6 @@ java_library(
     visibility = ["//visibility:public"],
     exports = PLUGIN_DEPS + PLUGIN_TEST_DEPS + [
         ":heartbeat__plugin",
+        "@easymock//jar",
     ],
 )
