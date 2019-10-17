@@ -3,7 +3,7 @@ workspace(name = "heartbeat")
 load("//:bazlets.bzl", "load_bazlets")
 
 load_bazlets(
-    commit = "bf900bbe58f7a7802799d6d6477567b05ab2f399",
+    commit = "7744d119c623494f7c7ec621e20cd66ea5bc04f6",
     #local_path = "/home/<user>/projects/bazlets",
 )
 
@@ -24,7 +24,3 @@ gerrit_api_maven_local()
 
 # Load release Plugin API
 #gerrit_api()
-
-load("//:external_plugin_deps.bzl", "external_plugin_deps")
-
-external_plugin_deps()

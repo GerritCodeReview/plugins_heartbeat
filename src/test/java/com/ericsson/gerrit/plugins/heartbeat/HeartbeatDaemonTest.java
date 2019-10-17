@@ -14,14 +14,11 @@
 
 package com.ericsson.gerrit.plugins.heartbeat;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.createNiceMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.expectLastCall;
-import static org.easymock.EasyMock.isA;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.reset;
-import static org.easymock.EasyMock.verify;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.server.events.EventDispatcher;
@@ -36,27 +33,19 @@ public class HeartbeatDaemonTest {
   @SuppressWarnings("unchecked")
   @Before
   public void setUp() throws Exception {
-    eventDispatcherMock = createNiceMock(EventDispatcher.class);
-    replay(eventDispatcherMock);
-    DynamicItem<EventDispatcher> dynamicEventDispatcherMock = createNiceMock(DynamicItem.class);
-    expect(dynamicEventDispatcherMock.get()).andReturn(eventDispatcherMock).anyTimes();
-    replay(dynamicEventDispatcherMock);
-    HeartbeatConfig heartbeatConfigMock = createMock(HeartbeatConfig.class);
-    expect(heartbeatConfigMock.getDelay()).andReturn(1).anyTimes();
-    replay(heartbeatConfigMock);
+    eventDispatcherMock = mock(EventDispatcher.class);
+    DynamicItem<EventDispatcher> dynamicEventDispatcherMock = mock(DynamicItem.class);
+    when(dynamicEventDispatcherMock.get()).thenReturn(eventDispatcherMock);
+    HeartbeatConfig heartbeatConfigMock = mock(HeartbeatConfig.class);
+    when(heartbeatConfigMock.getDelay()).thenReturn(1);
     heartbeatDaemon = new HeartbeatDaemon(dynamicEventDispatcherMock, heartbeatConfigMock);
   }
 
   @Test
   public void thatDaemonSendsHeartbeatEvents() throws Exception {
-    reset(eventDispatcherMock);
-    eventDispatcherMock.postEvent(isA(HeartbeatEvent.class));
-    expectLastCall().atLeastOnce();
-    replay(eventDispatcherMock);
-
     heartbeatDaemon.start();
     TimeUnit.MILLISECONDS.sleep(500);
-    verify(eventDispatcherMock);
+    verify(eventDispatcherMock, atLeastOnce()).postEvent(any(HeartbeatEvent.class));
     heartbeatDaemon.stop();
   }
 }
