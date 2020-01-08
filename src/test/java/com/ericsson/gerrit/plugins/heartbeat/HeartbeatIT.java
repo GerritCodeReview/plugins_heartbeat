@@ -16,7 +16,7 @@ package com.ericsson.gerrit.plugins.heartbeat;
 
 import static com.google.common.truth.Truth.assertWithMessage;
 
-import com.google.gerrit.acceptance.GlobalPluginConfig;
+import com.google.gerrit.acceptance.config.GlobalPluginConfig;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.NoHttpd;
 import com.google.gerrit.acceptance.TestPlugin;
