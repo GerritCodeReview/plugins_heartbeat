@@ -16,6 +16,24 @@
       "revId": "0f26ee3f316bbe7b376ce80100ea44b6022dafb9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "71ef9f3d_e55cd436",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-07-16T18:07:44Z",
+      "side": 1,
+      "message": "\u003e Re-running the failed check.\n\n(Was a POST_FAILURE too.)",
+      "parentUuid": "a24226e7_7a4e8e12",
+      "revId": "0f26ee3f316bbe7b376ce80100ea44b6022dafb9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
