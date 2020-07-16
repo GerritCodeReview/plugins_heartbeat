@@ -1,9 +1,11 @@
 {
   "checks": {
     "zuul-check:plugins_heartbeat": {
-      "state": "NOT_STARTED",
+      "state": "SCHEDULED",
+      "message": "Change has been enqueued in check",
+      "started": "2020-07-16T18:06:21Z",
       "created": "2020-07-16T17:41:51Z",
-      "updated": "2020-07-16T18:06:04Z"
+      "updated": "2020-07-16T18:06:21Z"
     }
   }
 }
