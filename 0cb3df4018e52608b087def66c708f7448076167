@@ -1,13 +1,9 @@
 {
   "checks": {
     "zuul-check:plugins_heartbeat": {
-      "state": "FAILED",
-      "message": "Change failed",
-      "url": "https://ci.gerritcodereview.com/t/gerrit/buildset/2812a52807234899b7d4a08eb3b48bda",
-      "started": "2020-09-03T19:15:44Z",
-      "finished": "2020-09-03T19:20:36Z",
+      "state": "NOT_STARTED",
       "created": "2020-09-03T19:15:44Z",
-      "updated": "2020-09-03T19:20:36Z"
+      "updated": "2020-09-04T12:44:29Z"
     }
   }
 }
