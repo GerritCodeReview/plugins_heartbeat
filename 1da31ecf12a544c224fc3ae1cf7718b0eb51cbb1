@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70f289f8_ccfd73ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-11-11T19:56:28Z",
+      "side": 1,
+      "message": "Known CI issue. Already verified locally.",
+      "revId": "1da31ecf12a544c224fc3ae1cf7718b0eb51cbb1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
